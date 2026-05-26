@@ -1,0 +1,19 @@
+# Archivos temporales
+*.tmp
+*.log
+*.bak
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code
+.vscode/
+
+# SQL Server temporales
+*.trn
+*.ldf
+*.mdf
+
+# Power BI backups temporales
+*.pbitmp

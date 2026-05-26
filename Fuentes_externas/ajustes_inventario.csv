@@ -1,0 +1,21 @@
+FechaAjuste,TiendaID,ProductoID,TipoAjuste,CantidadAjuste,Motivo,UsuarioResponsable
+2024-01-05,1,10,Entrada,15,Conteo físico mayor al sistema,auxiliar.medellin
+2024-01-07,1,25,Salida,8,Producto averiado,auxiliar.medellin
+2024-01-10,2,18,Entrada,20,Ajuste por inventario físico,auxiliar.bogota
+2024-01-15,2,30,Salida,6,Diferencia en conteo,auxiliar.bogota
+2024-02-03,3,42,Entrada,12,Reconteo de bodega,auxiliar.cali
+2024-02-08,3,55,Salida,5,Producto vencido,auxiliar.cali
+2024-02-12,4,70,Entrada,18,Ajuste por traslado interno,auxiliar.barranquilla
+2024-02-17,4,81,Salida,9,Mermas operativas,auxiliar.barranquilla
+2024-03-04,5,92,Entrada,25,Corrección de recepción,auxiliar.bucaramanga
+2024-03-09,5,105,Salida,7,Deterioro de empaque,auxiliar.bucaramanga
+2024-03-14,6,118,Entrada,14,Inventario físico superior,auxiliar.cartagena
+2024-03-21,6,127,Salida,4,Ajuste por pérdida,auxiliar.cartagena
+2024-04-02,7,133,Entrada,16,Ajuste por auditoría,auxiliar.pereira
+2024-04-06,7,144,Salida,6,Diferencia en góndola,auxiliar.pereira
+2024-04-11,8,150,Entrada,10,Traslado recibido,auxiliar.manizales
+2024-04-16,8,161,Salida,5,Producto no apto para venta,auxiliar.manizales
+2024-05-03,9,172,Entrada,22,Ajuste por bodega externa,auxiliar.villavicencio
+2024-05-09,9,183,Salida,8,Mermas por manipulación,auxiliar.villavicencio
+2024-05-15,10,194,Entrada,13,Reconteo físico,auxiliar.pasto
+2024-05-21,10,199,Salida,3,Producto vencido,auxiliar.pasto

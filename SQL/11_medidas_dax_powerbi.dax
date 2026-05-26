@@ -1,0 +1,118 @@
+Total Ventas = 
+SUM(FactVentas[ValorVenta])
+
+Total Costo = 
+SUM(FactVentas[CostoTotal])
+
+Utilidad Bruta = 
+[Total Ventas] - [Total Costo]
+
+Margen Bruto % = 
+DIVIDE([Utilidad Bruta], [Total Ventas])
+
+Ventas Año Anterior = 
+CALCULATE(
+    [Total Ventas],
+    SAMEPERIODLASTYEAR(DimFecha[Fecha])
+)
+
+Crecimiento Ventas % = 
+DIVIDE(
+    [Total Ventas] - [Ventas Año Anterior],
+    [Ventas Año Anterior]
+)
+
+Total Meta = 
+SUM(FactMetasComerciales[ValorMeta])
+
+Cumplimiento Meta % = 
+DIVIDE(
+    [Total Ventas],
+    [Total Meta]
+)
+
+Brecha Meta = 
+[Total Ventas] - [Total Meta]
+
+Ranking Productos = 
+RANKX(
+    ALL(DimProducto[NombreProducto]),
+    [Total Ventas],
+    ,
+    DESC,
+    DENSE
+)
+
+Ranking Tiendas = 
+RANKX(
+    ALL(DimTienda[NombreTienda]),
+    [Total Ventas],
+    ,
+    DESC,
+    DENSE
+)
+
+Promedio Móvil Ventas 3 meses = 
+AVERAGEX(
+    DATESINPERIOD(
+        DimFecha[Fecha],
+        MAX(DimFecha[Fecha]),
+        -3,
+        MONTH
+    ),
+    [Total Ventas]
+)
+
+Participación % por Categoría = 
+DIVIDE(
+    [Total Ventas],
+    CALCULATE(
+        [Total Ventas],
+        ALL(DimProducto[NombreCategoria])
+    )
+)
+
+Ticket Promedio = 
+DIVIDE(
+    [Total Ventas],
+    DISTINCTCOUNT(FactVentas[VentaID_OLTP])
+)
+
+Inventario Promedio = 
+AVERAGE(FactInventarioDiario[StockFinal])
+
+Unidades Vendidas = 
+SUM(FactVentas[Cantidad])
+
+Rotación de Inventario Unidades = 
+DIVIDE(
+    [Unidades Vendidas],
+    [Inventario Promedio]
+)
+
+Entradas Totales = 
+SUM(FactInventarioDiario[Entradas])
+
+Salidas Totales = 
+SUM(FactInventarioDiario[Salidas])
+
+Stock Mínimo = 
+MIN(FactInventarioDiario[StockFinal])
+
+Total Devoluciones = 
+SUM(FactDevoluciones[ValorDevuelto])
+
+Cantidad Devoluciones = 
+COUNTROWS(FactDevoluciones)
+
+Tasa Devolución % = 
+DIVIDE(
+    [Total Devoluciones],
+    [Total Ventas]
+)
+
+Total Compras = 
+SUM(FactCompras[ValorCompra])
+
+Unidades Compradas = 
+SUM(FactCompras[Cantidad])
