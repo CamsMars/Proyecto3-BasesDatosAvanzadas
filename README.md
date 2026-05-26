@@ -603,7 +603,17 @@ La información de acceso a la VM, incluyendo IP pública, usuario y contraseña
 
 ---
 
-## 15. Notas importantes
+## 15. URL del tablero publicado en Power BI Service
+
+El tablero del proyecto fue publicado en Power BI Service y puede consultarse en el siguiente enlace:
+
+https://app.powerbi.com/groups/me/reports/fbc8582f-3e62-4be7-bc9a-0fbcc41dc220/0fd03ea381c4caed9d43?experience=power-bi
+
+Nota: el acceso al tablero depende de los permisos de la cuenta utilizada en Power BI Service (cuenta de la universidad).
+
+---
+
+## 16. Notas importantes
 
 - El archivo `.dax` no se ejecuta en SQL Server.
 - Los CSV deben existir físicamente en la ruta configurada para poder usar `BULK INSERT`.
