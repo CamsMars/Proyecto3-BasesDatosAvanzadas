@@ -586,7 +586,7 @@ El proyecto fue construido inicialmente en ambiente local. Para replicarlo en Az
 8. Publicar el reporte en Power BI Service.
 9. Entregar IP, usuario, contraseña y URL del reporte por un canal privado.
 
-No se deben publicar credenciales en GitHub.
+a información de acceso a la VM, incluyendo IP pública, usuario y contraseña, se entrega por un canal privado por seguridad.
 
 ---
 
@@ -594,7 +594,7 @@ No se deben publicar credenciales en GitHub.
 
 - El archivo `.dax` no se ejecuta en SQL Server.
 - Los CSV deben existir físicamente en la ruta configurada para poder usar `BULK INSERT`.
-- Las credenciales de Azure no deben subirse al repositorio.
+- Las credenciales de Azure no están en el repositorio.
 - La tabla `ETL_Log` puede aumentar registros si se ejecutan de nuevo procedimientos de validación o carga.
 - El inventario no debe sumarse directamente a través del tiempo, porque es una medida semi-aditiva.
 - El cumplimiento de metas quedó bajo porque las metas generadas fueron altas frente a las ventas sintéticas. No se modificó este resultado para no alterar el análisis.
