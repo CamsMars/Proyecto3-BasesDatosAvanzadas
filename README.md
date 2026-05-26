@@ -28,19 +28,19 @@ El objetivo principal fue implementar una solución BI que permitiera transforma
 
 La solución permite analizar:
 
-- ventas;
-- costos;
-- utilidad bruta;
-- margen bruto;
-- inventario;
-- compras;
-- devoluciones;
-- cumplimiento de metas;
-- desempeño de tiendas;
-- desempeño de vendedores;
-- ventas por canal;
-- comportamiento por categoría de producto;
-- análisis OLAP por jerarquías.
+- Ventas.
+- Costos.
+- Utilidad bruta.
+- Margen bruto.
+- Inventario.
+- Compras.
+- Devoluciones.
+- Cumplimiento de metas.
+- Desempeño de tiendas.
+- Desempeño de vendedores.
+- Ventas por canal.
+- Comportamiento por categoría de producto.
+- Análisis OLAP por jerarquías.
 
 ---
 
@@ -55,42 +55,42 @@ La solución está dividida en cuatro capas:
 4. Power BI
 ```
 
-## 3.1 BI_OLTP
+### 3.1 BI_OLTP
 
 `BI_OLTP` representa la base operacional de la empresa. Allí se simulan las operaciones diarias: ventas, compras, clientes, productos, tiendas, vendedores, inventario, devoluciones y metas.
 
 Esta base está normalizada y contiene claves primarias, claves foráneas, restricciones `CHECK`, campos `NOT NULL` y validaciones básicas de integridad.
 
-## 3.2 BI_Staging
+### 3.2 BI_Staging
 
 `BI_Staging` es la zona intermedia de preparación de datos. En esta etapa los datos se copian desde el OLTP y se preparan antes de llegar al Data Warehouse.
 
 En esta base se realizan procesos como:
 
-- limpieza de datos;
-- estandarización de ciudades y departamentos;
-- asignación de regiones;
-- validación de códigos inexistentes;
-- detección de duplicados;
-- cálculo de campos derivados;
-- marcación de registros válidos o inválidos;
-- integración de archivos CSV externos.
+- Limpieza de datos.
+- Estandarización de ciudades y departamentos.
+- Asignación de regiones.
+- Validación de códigos inexistentes.
+- Detección de duplicados.
+- Cálculo de campos derivados.
+- Marcación de registros válidos o inválidos.
+- Integración de archivos CSV externos.
 
-## 3.3 BI_DW
+### 3.3 BI_DW
 
 `BI_DW` es el Data Warehouse. Se diseñó con un modelo estrella para facilitar el análisis en Power BI.
 
 Contiene dimensiones y tablas de hechos. Las dimensiones describen el contexto de los datos y las tablas de hechos almacenan las métricas principales.
 
-## 3.4 Power BI
+### 3.4 Power BI
 
 Power BI se conectó al Data Warehouse `BI_DW` para construir un dashboard con cinco páginas:
 
-1. Resumen Ejecutivo
-2. Análisis de Ventas
-3. Inventario
-4. Metas y Operación
-5. Rentabilidad y OLAP
+1. Resumen Ejecutivo.
+2. Análisis de Ventas.
+3. Inventario.
+4. Metas y Operación.
+5. Rentabilidad y OLAP.
 
 ---
 
@@ -151,7 +151,7 @@ README.md
 
 Los scripts se encuentran en la carpeta `SQL`.
 
-## 5.1 Orden de ejecución
+### 5.1 Orden de ejecución
 
 Los scripts deben ejecutarse en el siguiente orden:
 
@@ -175,7 +175,7 @@ El archivo `11_medidas_dax_powerbi.dax` no se ejecuta en SQL Server. Ese archivo
 
 ## 6. Descripción de los scripts
 
-## 6.1 `1_resetear_base_de_datos.sql`
+### 6.1 `1_resetear_base_de_datos.sql`
 
 Elimina y vuelve a crear las tres bases principales:
 
@@ -185,7 +185,7 @@ Elimina y vuelve a crear las tres bases principales:
 
 Este script se usa cuando se quiere ejecutar el proyecto desde cero.
 
-## 6.2 `2_creacion_oltp.sql`
+### 6.2 `2_creacion_oltp.sql`
 
 Crea las tablas operacionales del OLTP con sus claves, restricciones y relaciones.
 
@@ -206,13 +206,13 @@ Tablas principales:
 - `Devoluciones`
 - `MetasComerciales`
 
-## 6.3 `3_cargar_datos_oltp.sql`
+### 6.3 `3_cargar_datos_oltp.sql`
 
 Carga datos sintéticos en la base `BI_OLTP`.
 
 Los datos fueron generados con instrucciones basadas en conjuntos, principalmente usando `INSERT INTO ... SELECT` y `CROSS JOIN`, evitando ciclos `WHILE`.
 
-## 6.4 `4_creacion_staging.sql`
+### 6.4 `4_creacion_staging.sql`
 
 Crea las tablas de la zona intermedia `BI_Staging`.
 
@@ -222,24 +222,24 @@ Estas tablas reciben datos del OLTP y contienen campos de control como:
 - `MensajeValidacion`
 - `FechaCargaStaging`
 
-## 6.5 `5_procedimientos_staging.sql`
+### 6.5 `5_procedimientos_staging.sql`
 
 Crea procedimientos almacenados para cargar datos desde `BI_OLTP` hacia `BI_Staging`.
 
 También realiza transformaciones como:
 
-- limpieza de nulos;
-- estandarización;
-- validación;
-- cálculo de campos derivados.
+- Limpieza de nulos.
+- Estandarización.
+- Validación.
+- Cálculo de campos derivados.
 
-## 6.6 `6_creacion_datawarehouse.sql`
+### 6.6 `6_creacion_datawarehouse.sql`
 
 Crea el Data Warehouse `BI_DW` con modelo estrella.
 
 Incluye dimensiones, hechos y la tabla de auditoría `ETL_Log`.
 
-## 6.7 `7_etl_dimensiones.sql`
+### 6.7 `7_etl_dimensiones.sql`
 
 Crea y ejecuta los procedimientos para cargar dimensiones:
 
@@ -252,7 +252,7 @@ Crea y ejecuta los procedimientos para cargar dimensiones:
 - `CargarDimCanalVenta`
 - `CargarDimGeografia`
 
-## 6.8 `8_etl_hechos.sql`
+### 6.8 `8_etl_hechos.sql`
 
 Crea y ejecuta los procedimientos para cargar tablas de hechos:
 
@@ -264,36 +264,36 @@ Crea y ejecuta los procedimientos para cargar tablas de hechos:
 
 También incluye una corrección para completar `DimFecha` con fechas faltantes de devoluciones.
 
-## 6.9 `9_etl_validacion.sql`
+### 6.9 `9_etl_validacion.sql`
 
 Crea procedimientos generales de ejecución y validación del ETL.
 
 Incluye procesos como:
 
-- ejecución completa del flujo ETL;
-- validación de calidad de datos;
-- comparación de conteos entre Staging y Data Warehouse;
-- registro de resultados en `ETL_Log`.
+- Ejecución completa del flujo ETL.
+- Validación de calidad de datos.
+- Comparación de conteos entre Staging y Data Warehouse.
+- Registro de resultados en `ETL_Log`.
 
-## 6.10 `10_consultas_evidencias.sql`
+### 6.10 `10_consultas_evidencias.sql`
 
 Contiene consultas para generar evidencias del proyecto:
 
-- bases creadas;
-- conteos OLTP;
-- conteos Staging;
-- conteos DW;
-- ETL_Log;
-- validaciones;
-- análisis de ventas, inventario y devoluciones.
+- Bases creadas.
+- Conteos OLTP.
+- Conteos Staging.
+- Conteos DW.
+- ETL_Log.
+- Validaciones.
+- Análisis de ventas, inventario y devoluciones.
 
-## 6.11 `11_medidas_dax_powerbi.dax`
+### 6.11 `11_medidas_dax_powerbi.dax`
 
 Contiene las medidas DAX utilizadas en Power BI.
 
 Este archivo no se ejecuta en SQL Server. Las medidas deben crearse desde Power BI Desktop, en la opción de nueva medida.
 
-## 6.12 `12_fuentes_externas.sql`
+### 6.12 `12_fuentes_externas.sql`
 
 Carga los archivos CSV externos hacia tablas auxiliares en `BI_Staging` mediante `BULK INSERT`.
 
@@ -337,30 +337,30 @@ Fuentes_externas/metas_mensuales.csv
 Fuentes_externas/ajustes_inventario.csv
 ```
 
-## 8.1 `metas_mensuales.csv`
+### 8.1 `metas_mensuales.csv`
 
 Este archivo representa metas comerciales por:
 
-- año;
-- mes;
-- tienda;
-- categoría;
-- valor meta.
+- Año.
+- Mes.
+- Tienda.
+- Categoría.
+- Valor meta.
 
 La idea es simular información que podría venir desde un archivo externo manejado por el área comercial.
 
-## 8.2 `ajustes_inventario.csv`
+### 8.2 `ajustes_inventario.csv`
 
 Este archivo representa ajustes manuales de inventario, como:
 
-- entradas;
-- salidas;
-- mermas;
-- productos vencidos;
-- diferencias de conteo;
-- correcciones de recepción.
+- Entradas.
+- Salidas.
+- Mermas.
+- Productos vencidos.
+- Diferencias de conteo.
+- Correcciones de recepción.
 
-## 8.3 Carga de CSV en SQL Server
+### 8.3 Carga de CSV en SQL Server
 
 Los archivos se cargan mediante el script:
 
@@ -382,7 +382,7 @@ Aunque en GitHub los archivos están en la carpeta `Fuentes_externas`, SQL Serve
 
 ## 9. Modelo dimensional
 
-## 9.1 Dimensiones
+### 9.1 Dimensiones
 
 El Data Warehouse contiene las siguientes dimensiones:
 
@@ -396,7 +396,7 @@ El Data Warehouse contiene las siguientes dimensiones:
 - `DimPromocion`
 - `DimGeografia`
 
-## 9.2 Tablas de hechos
+### 9.2 Tablas de hechos
 
 El Data Warehouse contiene las siguientes tablas de hechos:
 
@@ -406,7 +406,7 @@ El Data Warehouse contiene las siguientes tablas de hechos:
 - `FactDevoluciones`
 - `FactCompras`
 
-## 9.3 Granularidad
+### 9.3 Granularidad
 
 | Tabla de hechos | Granularidad |
 |---|---|
@@ -426,9 +426,9 @@ El archivo `.pbix` se encuentra en:
 PowerBI/Proyecto_Retail_Colombia.pbix
 ```
 
-El dashboard contiene cinco páginas:
+El dashboard contiene cinco páginas.
 
-## 10.1 Resumen Ejecutivo
+### 10.1 Resumen Ejecutivo
 
 Incluye KPIs principales:
 
@@ -440,48 +440,48 @@ Incluye KPIs principales:
 
 También incluye análisis de ventas por mes, categoría y tienda.
 
-## 10.2 Análisis de Ventas
+### 10.2 Análisis de Ventas
 
 Permite analizar ventas por:
 
-- vendedor;
-- canal;
-- segmento;
-- categoría;
-- tienda;
-- región.
+- Vendedor.
+- Canal.
+- Segmento.
+- Categoría.
+- Tienda.
+- Región.
 
-## 10.3 Inventario
+### 10.3 Inventario
 
 Analiza:
 
-- inventario promedio;
-- entradas;
-- salidas;
-- stock mínimo;
-- productos con menor inventario;
-- rotación de inventario en unidades.
+- Inventario promedio.
+- Entradas.
+- Salidas.
+- Stock mínimo.
+- Productos con menor inventario.
+- Rotación de inventario en unidades.
 
-## 10.4 Metas y Operación
+### 10.4 Metas y Operación
 
 Compara ventas reales contra metas comerciales y analiza:
 
-- brecha de metas;
-- cumplimiento por tienda;
-- devoluciones;
-- compras por proveedor.
+- Brecha de metas.
+- Cumplimiento por tienda.
+- Devoluciones.
+- Compras por proveedor.
 
-## 10.5 Rentabilidad y OLAP
+### 10.5 Rentabilidad y OLAP
 
 Analiza:
 
-- ventas;
-- costos;
-- utilidad bruta;
-- margen bruto;
-- ventas por categoría;
-- utilidad por tienda;
-- matriz OLAP con jerarquías de tiempo, región, tienda y categoría.
+- Ventas.
+- Costos.
+- Utilidad bruta.
+- Margen bruto.
+- Ventas por categoría.
+- Utilidad por tienda.
+- Matriz OLAP con jerarquías de tiempo, región, tienda y categoría.
 
 ---
 
@@ -521,22 +521,22 @@ La carpeta `Evidencias` contiene capturas que demuestran el funcionamiento del p
 
 Evidencias SQL:
 
-- bases creadas;
-- conteos OLTP;
-- conteos Staging;
-- conteos DW;
-- ETL_Log;
-- validación de calidad;
-- carga de fuentes externas.
+- Bases creadas.
+- Conteos OLTP.
+- Conteos Staging.
+- Conteos DW.
+- ETL_Log.
+- Validación de calidad.
+- Carga de fuentes externas.
 
 Evidencias Power BI:
 
-- modelo de relaciones;
-- página de resumen ejecutivo;
-- página de análisis de ventas;
-- página de inventario;
-- página de metas y operación;
-- página de rentabilidad y OLAP.
+- Modelo de relaciones.
+- Página de resumen ejecutivo.
+- Página de análisis de ventas.
+- Página de inventario.
+- Página de metas y operación.
+- Página de rentabilidad y OLAP.
 
 ---
 
@@ -550,23 +550,23 @@ La carpeta `Documentacion` contiene:
 - `diccionario_datos.xlsx`
 - `diagrama_modelo_dimensional.png`
 
-## 13.1 `informe_tecnico.md`
+### 13.1 `informe_tecnico.md`
 
 Explica la arquitectura, el diseño de bases, la granularidad, las medidas, el ETL, el modelo dimensional, Power BI y las conclusiones del proyecto.
 
-## 13.2 `preguntas_sustentacion.md`
+### 13.2 `preguntas_sustentacion.md`
 
 Contiene preguntas y respuestas posibles para la sustentación del proyecto.
 
-## 13.3 `decisiones_y_mejoras.md`
+### 13.3 `decisiones_y_mejoras.md`
 
 Registra decisiones tomadas durante el desarrollo, problemas encontrados, correcciones y mejoras aplicadas.
 
-## 13.4 `diccionario_datos.xlsx`
+### 13.4 `diccionario_datos.xlsx`
 
 Contiene el diccionario de datos generado a partir de las estructuras de SQL Server.
 
-## 13.5 `diagrama_modelo_dimensional.png`
+### 13.5 `diagrama_modelo_dimensional.png`
 
 Contiene la imagen del modelo dimensional construido en Power BI.
 
@@ -598,5 +598,3 @@ No se deben publicar credenciales en GitHub.
 - La tabla `ETL_Log` puede aumentar registros si se ejecutan de nuevo procedimientos de validación o carga.
 - El inventario no debe sumarse directamente a través del tiempo, porque es una medida semi-aditiva.
 - El cumplimiento de metas quedó bajo porque las metas generadas fueron altas frente a las ventas sintéticas. No se modificó este resultado para no alterar el análisis.
- 
- 
