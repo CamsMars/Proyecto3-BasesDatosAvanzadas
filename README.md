@@ -97,19 +97,19 @@ Power BI se conectó al Data Warehouse `BI_DW` para construir un dashboard con c
 ## 4. Estructura del repositorio
 
 ```text
-Proyecto-BI-Retail-Colombia/
+PROYECTO3_BDA/
 
 SQL/
-   01_resetear_base_de_datos.sql
-   02_creacion_oltp.sql
-   03_carga_datos_oltp.sql
-   04_creacion_staging.sql
-   05_procedimientos_staging.sql
-   06_creacion_datawarehouse.sql
-   07_etl_dimensiones.sql
-   08_etl_hechos.sql
-   09_etl_validacion.sql
-   10_consultas_evidencia.sql
+   1_resetear_base_de_datos.sql
+   2_creacion_oltp.sql
+   3_cargar_datos_oltp.sql
+   4_creacion_staging.sql
+   5_procedimientos_staging.sql
+   6_creacion_datawarehouse.sql
+   7_etl_dimensiones.sql
+   8_etl_hechos.sql
+   9_etl_validacion.sql
+   10_consultas_evidencias.sql
    11_medidas_dax_powerbi.dax
    12_fuentes_externas.sql
 
@@ -138,32 +138,34 @@ Evidencias/
    11_metas_operacion.png
    12_rentabilidad_olap.png
 
-Fuentes_Externas/
+Fuentes_externas/
    metas_mensuales.csv
    ajustes_inventario.csv
+
+README.md
 ```
 
 ---
 
 ## 5. Scripts SQL
 
-Los scripts se encuentran en la carpeta `01_SQL`.
+Los scripts se encuentran en la carpeta `SQL`.
 
 ## 5.1 Orden de ejecución
 
 Los scripts deben ejecutarse en el siguiente orden:
 
 ```text
-1. 01_resetear_base_de_datos.sql
-2. 02_creacion_oltp.sql
-3. 03_carga_datos_oltp.sql
-4. 04_creacion_staging.sql
-5. 05_procedimientos_staging.sql
-6. 06_creacion_datawarehouse.sql
-7. 07_etl_dimensiones.sql
-8. 08_etl_hechos.sql
-9. 09_etl_validacion.sql
-10. 10_consultas_evidencia.sql
+1. 1_resetear_base_de_datos.sql
+2. 2_creacion_oltp.sql
+3. 3_cargar_datos_oltp.sql
+4. 4_creacion_staging.sql
+5. 5_procedimientos_staging.sql
+6. 6_creacion_datawarehouse.sql
+7. 7_etl_dimensiones.sql
+8. 8_etl_hechos.sql
+9. 9_etl_validacion.sql
+10. 10_consultas_evidencias.sql
 11. 12_fuentes_externas.sql
 ```
 
@@ -173,7 +175,7 @@ El archivo `11_medidas_dax_powerbi.dax` no se ejecuta en SQL Server. Ese archivo
 
 ## 6. Descripción de los scripts
 
-## 6.1 `01_reset_bases.sql`
+## 6.1 `1_resetear_base_de_datos.sql`
 
 Elimina y vuelve a crear las tres bases principales:
 
@@ -183,7 +185,7 @@ Elimina y vuelve a crear las tres bases principales:
 
 Este script se usa cuando se quiere ejecutar el proyecto desde cero.
 
-## 6.2 `02_creacion_oltp.sql`
+## 6.2 `2_creacion_oltp.sql`
 
 Crea las tablas operacionales del OLTP con sus claves, restricciones y relaciones.
 
@@ -204,13 +206,13 @@ Tablas principales:
 - `Devoluciones`
 - `MetasComerciales`
 
-## 6.3 `03_carga_datos_oltp.sql`
+## 6.3 `3_cargar_datos_oltp.sql`
 
 Carga datos sintéticos en la base `BI_OLTP`.
 
 Los datos fueron generados con instrucciones basadas en conjuntos, principalmente usando `INSERT INTO ... SELECT` y `CROSS JOIN`, evitando ciclos `WHILE`.
 
-## 6.4 `04_creacion_staging.sql`
+## 6.4 `4_creacion_staging.sql`
 
 Crea las tablas de la zona intermedia `BI_Staging`.
 
@@ -220,7 +222,7 @@ Estas tablas reciben datos del OLTP y contienen campos de control como:
 - `MensajeValidacion`
 - `FechaCargaStaging`
 
-## 6.5 `05_procedimientos_staging.sql`
+## 6.5 `5_procedimientos_staging.sql`
 
 Crea procedimientos almacenados para cargar datos desde `BI_OLTP` hacia `BI_Staging`.
 
@@ -231,13 +233,13 @@ También realiza transformaciones como:
 - validación;
 - cálculo de campos derivados.
 
-## 6.6 `06_creacion_dw.sql`
+## 6.6 `6_creacion_datawarehouse.sql`
 
 Crea el Data Warehouse `BI_DW` con modelo estrella.
 
 Incluye dimensiones, hechos y la tabla de auditoría `ETL_Log`.
 
-## 6.7 `07_etl_dimensiones.sql`
+## 6.7 `7_etl_dimensiones.sql`
 
 Crea y ejecuta los procedimientos para cargar dimensiones:
 
@@ -250,7 +252,7 @@ Crea y ejecuta los procedimientos para cargar dimensiones:
 - `CargarDimCanalVenta`
 - `CargarDimGeografia`
 
-## 6.8 `08_etl_hechos.sql`
+## 6.8 `8_etl_hechos.sql`
 
 Crea y ejecuta los procedimientos para cargar tablas de hechos:
 
@@ -262,16 +264,18 @@ Crea y ejecuta los procedimientos para cargar tablas de hechos:
 
 También incluye una corrección para completar `DimFecha` con fechas faltantes de devoluciones.
 
-## 6.9 `09_etl_general_validacion.sql`
+## 6.9 `9_etl_validacion.sql`
 
-Crea dos procedimientos principales:
+Crea procedimientos generales de ejecución y validación del ETL.
 
-- `EjecutarETLCompleto`
-- `ValidarCalidadDatos`
+Incluye procesos como:
 
-El primero ejecuta el flujo general del ETL. El segundo valida la calidad de los datos y compara registros entre Staging y DW.
+- ejecución completa del flujo ETL;
+- validación de calidad de datos;
+- comparación de conteos entre Staging y Data Warehouse;
+- registro de resultados en `ETL_Log`.
 
-## 6.10 `10_consultas_evidencia.sql`
+## 6.10 `10_consultas_evidencias.sql`
 
 Contiene consultas para generar evidencias del proyecto:
 
@@ -287,9 +291,16 @@ Contiene consultas para generar evidencias del proyecto:
 
 Contiene las medidas DAX utilizadas en Power BI.
 
-## 6.12 `12_fuentes_externas_bulk_insert.sql`
+Este archivo no se ejecuta en SQL Server. Las medidas deben crearse desde Power BI Desktop, en la opción de nueva medida.
+
+## 6.12 `12_fuentes_externas.sql`
 
 Carga los archivos CSV externos hacia tablas auxiliares en `BI_Staging` mediante `BULK INSERT`.
+
+Los archivos usados son:
+
+- `metas_mensuales.csv`
+- `ajustes_inventario.csv`
 
 ---
 
@@ -322,8 +333,8 @@ Volúmenes principales:
 El proyecto incluye dos archivos CSV:
 
 ```text
-05_Fuentes_Externas/metas_mensuales.csv
-05_Fuentes_Externas/ajustes_inventario.csv
+Fuentes_externas/metas_mensuales.csv
+Fuentes_externas/ajustes_inventario.csv
 ```
 
 ## 8.1 `metas_mensuales.csv`
@@ -354,7 +365,7 @@ Este archivo representa ajustes manuales de inventario, como:
 Los archivos se cargan mediante el script:
 
 ```text
-01_SQL/12_fuentes_externas_bulk_insert.sql
+SQL/12_fuentes_externas.sql
 ```
 
 Antes de ejecutarlo, los archivos deben estar disponibles en la ruta local del servidor SQL:
@@ -364,6 +375,8 @@ C:\BI_Proyecto\05_Fuentes_Externas\
 ```
 
 Si se usa otra ruta, se debe modificar la variable `@RutaBase` dentro del script.
+
+Aunque en GitHub los archivos están en la carpeta `Fuentes_externas`, SQL Server necesita que los CSV existan físicamente en una ruta local del servidor donde se ejecuta `BULK INSERT`.
 
 ---
 
@@ -410,7 +423,7 @@ El Data Warehouse contiene las siguientes tablas de hechos:
 El archivo `.pbix` se encuentra en:
 
 ```text
-02_PowerBI/Proyecto_BI_Retail_Colombia.pbix
+PowerBI/Proyecto_Retail_Colombia.pbix
 ```
 
 El dashboard contiene cinco páginas:
@@ -504,7 +517,7 @@ Algunas de las medidas creadas fueron:
 
 ## 12. Evidencias
 
-La carpeta `04_Evidencias` contiene capturas que demuestran el funcionamiento del proyecto.
+La carpeta `Evidencias` contiene capturas que demuestran el funcionamiento del proyecto.
 
 Evidencias SQL:
 
@@ -527,7 +540,39 @@ Evidencias Power BI:
 
 ---
 
-## 13. Azure
+## 13. Documentación
+
+La carpeta `Documentacion` contiene:
+
+- `informe_tecnico.md`
+- `preguntas_sustentacion.md`
+- `decisiones_y_mejoras.md`
+- `diccionario_datos.xlsx`
+- `diagrama_modelo_dimensional.png`
+
+## 13.1 `informe_tecnico.md`
+
+Explica la arquitectura, el diseño de bases, la granularidad, las medidas, el ETL, el modelo dimensional, Power BI y las conclusiones del proyecto.
+
+## 13.2 `preguntas_sustentacion.md`
+
+Contiene preguntas y respuestas posibles para la sustentación del proyecto.
+
+## 13.3 `decisiones_y_mejoras.md`
+
+Registra decisiones tomadas durante el desarrollo, problemas encontrados, correcciones y mejoras aplicadas.
+
+## 13.4 `diccionario_datos.xlsx`
+
+Contiene el diccionario de datos generado a partir de las estructuras de SQL Server.
+
+## 13.5 `diagrama_modelo_dimensional.png`
+
+Contiene la imagen del modelo dimensional construido en Power BI.
+
+---
+
+## 14. Azure
 
 El proyecto fue construido inicialmente en ambiente local. Para replicarlo en Azure, se recomienda:
 
@@ -545,7 +590,7 @@ No se deben publicar credenciales en GitHub.
 
 ---
 
-## 14. Notas importantes
+## 15. Notas importantes
 
 - El archivo `.dax` no se ejecuta en SQL Server.
 - Los CSV deben existir físicamente en la ruta configurada para poder usar `BULK INSERT`.
@@ -553,6 +598,5 @@ No se deben publicar credenciales en GitHub.
 - La tabla `ETL_Log` puede aumentar registros si se ejecutan de nuevo procedimientos de validación o carga.
 - El inventario no debe sumarse directamente a través del tiempo, porque es una medida semi-aditiva.
 - El cumplimiento de metas quedó bajo porque las metas generadas fueron altas frente a las ventas sintéticas. No se modificó este resultado para no alterar el análisis.
-
-```#   P r o y e c t o 3 - B a s e s D a t o s A v a n z a d a s  
+ 
  
