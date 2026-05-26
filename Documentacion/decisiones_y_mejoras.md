@@ -395,7 +395,31 @@ La documentación explica que la IA apoyó en generación inicial, revisión y o
 
 ---
 
-## 16. Estado final de la parte práctica
+## 16. Decisión: replicar el proyecto en Azure
+
+## Situación
+
+Después de completar la implementación local, se replicó el proyecto en una máquina virtual de Azure para cumplir con el componente de despliegue en nube.
+
+## Decisión
+
+Se creó una VM con Windows Server, se instaló SQL Server Developer y SQL Server Management Studio, se descargó el repositorio desde GitHub y se ejecutaron los scripts SQL en el mismo orden definido para el proyecto.
+
+## Justificación
+
+La VM permite que el profesor pueda revisar el proyecto en un ambiente de servidor, sin depender únicamente de la ejecución local.
+
+## Resultado
+
+Las bases `BI_OLTP`, `BI_Staging` y `BI_DW` quedaron creadas en la VM. También se cargaron las fuentes externas CSV y se validaron los conteos finales.
+
+## Aprendizaje
+
+El despliegue en Azure permitió entender que una solución BI no solo debe funcionar localmente, sino que también debe poder replicarse en un entorno de nube.
+
+---
+
+## 17. Estado final de la parte práctica
 
 Al finalizar la parte práctica, se logró:
 
@@ -415,7 +439,7 @@ Al finalizar la parte práctica, se logró:
 
 ---
 
-## 17. Mejoras posibles
+## 18. Mejoras posibles
 
 En una versión futura se podría:
 
@@ -432,7 +456,7 @@ En una versión futura se podría:
 
 ---
 
-## 18. Reflexión final
+## 19. Reflexión final
 
 Este proyecto permitió entender que una solución BI no es solo crear un tablero. Requiere pensar en arquitectura, calidad de datos, granularidad, medidas, relaciones, procesos ETL y visualización.
 

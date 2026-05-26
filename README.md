@@ -137,6 +137,10 @@ Evidencias/
    10_inventario.png
    11_metas_operacion.png
    12_rentabilidad_olap.png
+   13_azure_bases_creadas.png
+   14_azure_conteos_dw.png
+   15_azure_fuentes_externas.png
+   16_azure_vm.png
 
 Fuentes_externas/
    metas_mensuales.csv
@@ -517,26 +521,35 @@ Algunas de las medidas creadas fueron:
 
 ## 12. Evidencias
 
-La carpeta `Evidencias` contiene capturas que demuestran el funcionamiento del proyecto.
+La carpeta `Evidencias` contiene capturas que demuestran el funcionamiento del proyecto en ambiente local y en Azure.
 
-Evidencias SQL:
+Evidencias SQL locales:
 
-- Bases creadas.
-- Conteos OLTP.
-- Conteos Staging.
-- Conteos DW.
-- ETL_Log.
-- Validación de calidad.
-- Carga de fuentes externas.
+- `1_bases_creadas.png`
+- `2_conteos_oltp.png`
+- `3_conteos_staging.png`
+- `4_conteos_dw.png`
+- `5_etl_log.png`
+- `6_validacion_calidad.png`
+- `6_2_validacion_calidad.png`
+- `7_fuentes_externas.png`
 
 Evidencias Power BI:
 
-- Modelo de relaciones.
-- Página de resumen ejecutivo.
-- Página de análisis de ventas.
-- Página de inventario.
-- Página de metas y operación.
-- Página de rentabilidad y OLAP.
+- `8_resumen_ejecutivo.png`
+- `9_analisis_ventas.png`
+- `10_inventario.png`
+- `11_metas_operacion.png`
+- `12_rentabilidad_olap.png`
+
+Evidencias Azure:
+
+- `13_azure_bases_creadas.png`
+- `14_azure_conteos_dw.png`
+- `15_azure_fuentes_externas.png`
+- `16_azure_vm.png`
+
+Las evidencias de Azure muestran que el proyecto fue replicado en una máquina virtual, que las bases `BI_OLTP`, `BI_Staging` y `BI_DW` fueron creadas correctamente, que las tablas de hechos principales contienen los registros esperados y que las fuentes externas CSV fueron cargadas en SQL Server.
 
 ---
 
@@ -586,7 +599,7 @@ El proyecto fue construido inicialmente en ambiente local. Para replicarlo en Az
 8. Publicar el reporte en Power BI Service.
 9. Entregar IP, usuario, contraseña y URL del reporte por un canal privado.
 
-a información de acceso a la VM, incluyendo IP pública, usuario y contraseña, se entrega por un canal privado por seguridad.
+La información de acceso a la VM, incluyendo IP pública, usuario y contraseña, se entrega por un canal privado por seguridad.
 
 ---
 

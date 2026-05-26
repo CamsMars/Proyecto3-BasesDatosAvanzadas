@@ -556,7 +556,18 @@ Se podría mejorar:
 
 ---
 
-## 53. ¿Cómo defendería el proyecto en una frase?
+## 53. ¿Cómo se desplegó el proyecto en Azure?
 
-El proyecto implementa una solución BI completa que transforma datos operacionales de una empresa minorista colombiana en un modelo analítico dimensional con ETL, control de calidad, medidas DAX y visualizaciones gerenciales en Power BI.
-```
+Se creó una máquina virtual con Windows Server, se instaló SQL Server Developer y SQL Server Management Studio, se descargó el repositorio desde GitHub y se ejecutaron los scripts SQL en orden. Luego se validó que las bases `BI_OLTP`, `BI_Staging` y `BI_DW` quedaran creadas correctamente.
+
+---
+
+## 54. ¿Por qué se usó una máquina virtual y no Azure SQL Database?
+
+Se usó una máquina virtual porque el proyecto ya estaba construido para SQL Server completo, con scripts T-SQL, `BULK INSERT` y archivos CSV en rutas locales. Una VM permite replicar el ambiente de SQL Server de forma más parecida al entorno local.
+
+---
+
+## 55. ¿Qué se entrega del despliegue en Azure?
+
+Se entregan evidencias de ejecución, la IP pública de la VM, el usuario, la contraseña por canal privado y la indicación de que dentro de la VM el servidor SQL se consulta como `localhost` usando Windows Authentication.

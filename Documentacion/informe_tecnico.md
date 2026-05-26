@@ -654,7 +654,17 @@ Después de esta corrección, `FactDevoluciones` quedó con los 1.000 registros 
 
 ---
 
-## 21. Ética y uso de IA
+## 21. Despliegue en Azure
+
+Además de la ejecución local, el proyecto fue replicado en una máquina virtual de Azure con Windows Server y SQL Server Developer. Dentro de la VM se descargó el repositorio, se instalaron las herramientas necesarias, se ejecutaron los scripts SQL en orden y se validó la creación de las bases `BI_OLTP`, `BI_Staging` y `BI_DW`.
+
+También se cargaron las fuentes externas CSV mediante `BULK INSERT` y se validaron los conteos finales de las tablas de hechos principales. Las evidencias de este proceso se encuentran en la carpeta `Evidencias`.
+
+Los datos de acceso a la VM no se publican en el repositorio por seguridad; se entregan únicamente por canal privado.
+
+---
+
+## 22. Ética y uso de IA
 
 Durante el proyecto se usó IA como herramienta de apoyo para organizar ideas, generar borradores de scripts, proponer medidas DAX, revisar errores y estructurar documentación.
 
@@ -674,7 +684,7 @@ Una estimación razonable es que la IA apoyó entre 55% y 65% de la generación 
 
 ---
 
-## 22. Retos principales
+## 23. Retos principales
 
 Los principales retos fueron:
 
@@ -690,7 +700,7 @@ Los principales retos fueron:
 
 ---
 
-## 23. Conclusiones
+## 24. Conclusiones
 
 El proyecto permitió construir una solución BI completa, desde datos operacionales hasta visualizaciones en Power BI.
 
